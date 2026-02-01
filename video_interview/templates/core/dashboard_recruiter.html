@@ -1,7 +1,12 @@
 <h1>Dashboard Recruteur</h1>
-<p>Créer et gérer vos entretiens {{ request.user.username}}</p>
+<p>Bienvenue, {{ request.user.username }} !</p>
 
-
-<p>
-    <a href="{% url 'logout' %}">Se déconnecter</a>
-</p>
+<h2>Vos entretiens</h2>
+<ul>
+  {% for interview in interviews %}
+    <li>{{ interview.title }} - {{ interview.candidate.username }} - {{ interview.scheduled_at }}</li>
+  {% empty %}
+    <li>Aucun entretien pour l'instant</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'logout' %}">Se déconnecter</a>
